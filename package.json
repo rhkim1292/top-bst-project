@@ -1,0 +1,32 @@
+{
+  "name": "top-bst-project",
+  "version": "1.0.0",
+  "description": "Implementation of a balanced binary search tree in JavaScript",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rhkim1292/top-bst-project.git"
+  },
+  "keywords": [
+    "binary",
+    "search",
+    "tree",
+    "bst",
+    "balanced",
+    "top",
+    "the",
+    "odin",
+    "project",
+    "theodinproject"
+  ],
+  "author": "Randy H Kim",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rhkim1292/top-bst-project/issues"
+  },
+  "homepage": "https://github.com/rhkim1292/top-bst-project#readme"
+}
