@@ -70,7 +70,23 @@ class Tree {
     node.right = this.buildTree(treeArr, mid + 1, end);
     return node;
   }
+
+  insert(root, value) {
+    if (!root) {
+        root = new Node(value);
+        return root;
+    }
+
+    if (value < root.val) root.left = this.insert(root.left, value);
+    else if (value > root.val) root.right = this.insert(root.right, value);
+
+    return root;
+  }
 }
 
 const tree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
+prettyPrint(tree.root);
+tree.insert(tree.root, 2);
+prettyPrint(tree.root);
+tree.insert(tree.root, 6);
 prettyPrint(tree.root);
