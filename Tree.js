@@ -62,7 +62,7 @@ class Tree {
 
   buildTree(treeArr, start, end) {
     if (start > end) {
-        return null;
+      return null;
     }
     const mid = parseInt((start + end) / 2);
     const node = new Node(treeArr[mid]);
@@ -71,22 +71,55 @@ class Tree {
     return node;
   }
 
-  insert(root, value) {
-    if (!root) {
+  insert(value) {
+    const insertHelper = (root, value) => {
+      if (!root) {
         root = new Node(value);
         return root;
-    }
+      }
 
-    if (value < root.val) root.left = this.insert(root.left, value);
-    else if (value > root.val) root.right = this.insert(root.right, value);
+      if (value < root.val) root.left = insertHelper(root.left, value);
+      else if (value > root.val) root.right = insertHelper(root.right, value);
 
-    return root;
+      return root;
+    };
+    insertHelper(this.root, value);
+  }
+
+  delete(value) {
+    const findMinVal = (root) => {
+      let minVal = root.val;
+      while (root.left) {
+        minVal = root.left.val;
+        root = root.left;
+      }
+      return minVal;
+    };
+
+    const deleteHelper = (root, value) => {
+      if (!root) return root;
+
+      if (value < root.val) root.left = deleteHelper(root.left, value);
+      else if (value > root.val) root.right = deleteHelper(root.right, value);
+      else {
+        if (!root.left) return root.right;
+        else if (!root.right) return root.left;
+        root.val = findMinVal(root.right);
+        root.right = deleteHelper(root.right, root.val);
+      }
+
+      return root;
+    };
+
+    this.root = deleteHelper(this.root, value);
   }
 }
 
 const tree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
 prettyPrint(tree.root);
-tree.insert(tree.root, 2);
+tree.insert(2);
 prettyPrint(tree.root);
-tree.insert(tree.root, 6);
+tree.insert(6);
+prettyPrint(tree.root);
+tree.delete(67);
 prettyPrint(tree.root);
