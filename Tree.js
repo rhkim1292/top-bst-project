@@ -127,8 +127,26 @@ class Tree {
 
     return findHelper(this.root, value);
   }
+
+  levelOrder(fn = []) {
+    const Q = [];
+    let curr = this.root;
+    Q.push(curr);
+    while (Q.length > 0) {
+      const visited = Q.shift();
+      if (visited.left) Q.push(visited.left);
+      if (visited.right) Q.push(visited.right);
+      if (typeof fn === 'function') fn(visited);
+      else fn.push(visited.val);
+    }
+
+    if (typeof fn !== 'function') return fn;
+  }
 }
 
+function addOne(node) {
+  node.val += 1;
+}
 const tree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
 prettyPrint(tree.root);
 tree.insert(2);
@@ -138,3 +156,6 @@ prettyPrint(tree.root);
 tree.delete(67);
 prettyPrint(tree.root);
 console.log(tree.find(10));
+console.log(tree.levelOrder());
+tree.levelOrder(addOne);
+prettyPrint(tree.root);
