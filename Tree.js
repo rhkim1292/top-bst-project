@@ -113,6 +113,20 @@ class Tree {
 
     this.root = deleteHelper(this.root, value);
   }
+
+  find(value) {
+    const findHelper = (root, value) => {
+      if (!root) return root;
+
+      if (value < root.val) return findHelper(root.left, value);
+      else if (value > root.val) return findHelper(root.right, value);
+      else {
+        return root;
+      }
+    };
+
+    return findHelper(this.root, value);
+  }
 }
 
 const tree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
@@ -123,3 +137,4 @@ tree.insert(6);
 prettyPrint(tree.root);
 tree.delete(67);
 prettyPrint(tree.root);
+console.log(tree.find(10));
