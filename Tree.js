@@ -158,6 +158,36 @@ class Tree {
       return fn;
     }
   }
+
+  preorder(fn = []) {
+    const S = [];
+    let curr = this.root;
+    S.push(curr);
+    while (S.length > 0) {
+      const visited = S.pop();
+      if (visited.right) S.push(visited.right);
+      if (visited.left) S.push(visited.left);
+      if (typeof fn === 'function') fn(visited);
+      else fn.push(visited.val);
+    }
+    if (typeof fn !== 'function') return fn;
+  }
+
+  postorder(fn = []) {
+    const postorderRecHelper = (root) => {
+      if (!root) return;
+      postorderRecHelper(root.left);
+      postorderRecHelper(root.right);
+      if (typeof fn === 'function') fn(root);
+      else fn.push(root.val);
+    };
+
+    if (typeof fn === 'function') postorderRecHelper(this.root);
+    else {
+      postorderRecHelper(this.root);
+      return fn;
+    }
+  }
 }
 
 function addOne(node) {
@@ -175,6 +205,8 @@ console.log(tree.find(10));
 console.log(tree.levelOrder());
 tree.levelOrder(addOne);
 prettyPrint(tree.root);
-console.log(tree.inorder());
 tree.inorder(addOne);
 prettyPrint(tree.root);
+console.log(tree.inorder());
+console.log(tree.preorder());
+console.log(tree.postorder());
