@@ -188,6 +188,11 @@ class Tree {
       return fn;
     }
   }
+
+  height(node) {
+    if (!node) return -1;
+    return Math.max(this.height(node.left) + 1, this.height(node.right) + 1);
+  }
 }
 
 function addOne(node) {
@@ -210,3 +215,7 @@ prettyPrint(tree.root);
 console.log(tree.inorder());
 console.log(tree.preorder());
 console.log(tree.postorder());
+console.log(tree.height(tree.root));
+const tree2 = new Tree([1,2,3,4,5,6,7]);
+prettyPrint(tree2.root);
+console.log(tree2.height(tree2.root));
