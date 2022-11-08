@@ -142,6 +142,22 @@ class Tree {
 
     if (typeof fn !== 'function') return fn;
   }
+
+  inorder(fn = []) {
+    const inorderRecHelper = (root) => {
+      if (!root) return;
+      inorderRecHelper(root.left);
+      if (typeof fn === 'function') fn(root);
+      else fn.push(root.val);
+      inorderRecHelper(root.right);
+    };
+
+    if (typeof fn === 'function') inorderRecHelper(this.root);
+    else {
+      inorderRecHelper(this.root);
+      return fn;
+    }
+  }
 }
 
 function addOne(node) {
@@ -158,4 +174,7 @@ prettyPrint(tree.root);
 console.log(tree.find(10));
 console.log(tree.levelOrder());
 tree.levelOrder(addOne);
+prettyPrint(tree.root);
+console.log(tree.inorder());
+tree.inorder(addOne);
 prettyPrint(tree.root);
