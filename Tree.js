@@ -193,6 +193,25 @@ class Tree {
     if (!node) return -1;
     return Math.max(this.height(node.left) + 1, this.height(node.right) + 1);
   }
+
+  depth(node) {
+    const depthHelper = (root) => {
+      if (!root) return -1;
+
+      let d = -1;
+
+      if (
+        root === node ||
+        (d = depthHelper(root.left)) >= 0 ||
+        (d = depthHelper(root.right)) >= 0
+      )
+        return d + 1;
+
+      return d;
+    };
+
+    return depthHelper(this.root);
+  }
 }
 
 function addOne(node) {
@@ -216,6 +235,7 @@ console.log(tree.inorder());
 console.log(tree.preorder());
 console.log(tree.postorder());
 console.log(tree.height(tree.root));
-const tree2 = new Tree([1,2,3,4,5,6,7]);
+const tree2 = new Tree([1, 2, 3, 4, 5, 6, 7]);
 prettyPrint(tree2.root);
 console.log(tree2.height(tree2.root));
+console.log(tree2.depth(tree2.root.right));
