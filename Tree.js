@@ -212,11 +212,23 @@ class Tree {
 
     return depthHelper(this.root);
   }
+
+  isBalanced() {
+    const boolArr = [];
+    const isBalancedHelper = (root) => {
+      const leftHeight = this.height(root.left);
+      const rightHeight = this.height(root.right);
+      boolArr.push(Math.abs(leftHeight - rightHeight) <= 1);
+    };
+    this.levelOrder(isBalancedHelper);
+    return boolArr.every(x => x);
+  }
 }
 
 function addOne(node) {
   node.val += 1;
 }
+
 const tree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
 prettyPrint(tree.root);
 tree.insert(2);
@@ -239,3 +251,6 @@ const tree2 = new Tree([1, 2, 3, 4, 5, 6, 7]);
 prettyPrint(tree2.root);
 console.log(tree2.height(tree2.root));
 console.log(tree2.depth(tree2.root.right));
+console.log(tree2.isBalanced());
+prettyPrint(tree.root);
+console.log(tree.isBalanced());
