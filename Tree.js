@@ -223,34 +223,10 @@ class Tree {
     this.levelOrder(isBalancedHelper);
     return boolArr.every(x => x);
   }
-}
 
-function addOne(node) {
-  node.val += 1;
+  rebalance() {
+    const inorderArr = this.inorder();
+    console.log(inorderArr);
+    this.root = this.buildTree(inorderArr, 0, inorderArr.length - 1);
+  }
 }
-
-const tree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
-prettyPrint(tree.root);
-tree.insert(2);
-prettyPrint(tree.root);
-tree.insert(6);
-prettyPrint(tree.root);
-tree.delete(67);
-prettyPrint(tree.root);
-console.log(tree.find(10));
-console.log(tree.levelOrder());
-tree.levelOrder(addOne);
-prettyPrint(tree.root);
-tree.inorder(addOne);
-prettyPrint(tree.root);
-console.log(tree.inorder());
-console.log(tree.preorder());
-console.log(tree.postorder());
-console.log(tree.height(tree.root));
-const tree2 = new Tree([1, 2, 3, 4, 5, 6, 7]);
-prettyPrint(tree2.root);
-console.log(tree2.height(tree2.root));
-console.log(tree2.depth(tree2.root.right));
-console.log(tree2.isBalanced());
-prettyPrint(tree.root);
-console.log(tree.isBalanced());
