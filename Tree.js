@@ -226,7 +226,6 @@ class Tree {
 
   rebalance() {
     const inorderArr = this.inorder();
-    console.log(inorderArr);
     this.root = this.buildTree(inorderArr, 0, inorderArr.length - 1);
   }
 }
