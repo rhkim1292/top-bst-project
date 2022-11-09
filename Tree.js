@@ -230,3 +230,5 @@ class Tree {
     this.root = this.buildTree(inorderArr, 0, inorderArr.length - 1);
   }
 }
+
+export default Tree;
